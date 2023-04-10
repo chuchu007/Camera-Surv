@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-
+import Header from "../../components/Header";
+import { Box } from "@mui/material";
 function UserList() {
   const [users, setUsers] = useState([]);
 
@@ -17,18 +18,12 @@ function UserList() {
   }, []);
 
   return (
-    <div>
-      <h1>User List</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.Username}>
-            <p>Username: {user.Username}</p>
-            <p>Email: {user.Attributes.find(attr => attr.Name === 'email').Value}</p>
-            <hr />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Box m="20px">
+          {/* HEADER */}
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Header title="Users" subtitle="User management console" />
+            </Box>
+    </Box>
   );
 }
 
