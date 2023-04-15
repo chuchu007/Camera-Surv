@@ -195,6 +195,13 @@ useEffect(() => {
               setSelected={setSelected}
             />
             <Item
+              title="Manage Files"
+              to="/manageFiles"
+              // icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Contacts Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}

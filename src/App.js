@@ -14,6 +14,7 @@ import Team from "./scenes/team";
 import Calendar from "./scenes/calendar/calendar";
 // import Invoices from "./scenes/invoices";
 import Contacts from "./scenes/contacts";
+import ManageFiles from "./scenes/managefiles";
 // import Bar from "./scenes/bar";
 // import Form from "./scenes/form";
 // import Line from "./scenes/line";
@@ -81,6 +82,7 @@ function App({ signOut, user }) {
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/calendar" element={<Calendar />} /> 
+              <Route path="/manageFiles" element={<ManageFiles />} />
               
             </Routes>
       
