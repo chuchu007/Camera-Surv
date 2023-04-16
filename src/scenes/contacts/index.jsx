@@ -26,7 +26,7 @@ function Contacts() {
 });
   const listUsers = async () => {
     try {
-      const data = await cognitoClient.send(new ListUsersCommand({ UserPoolId: "us-east-1_yZDcfnqL2" }));
+      const data = await cognitoClient.send(new ListUsersCommand({ UserPoolId: process.env.REACT_APP_USER_POOL_ID }));
       const usersWithIds = data.Users.map((user, index) => ({
         id: index + 1,
         username: user.Username,
