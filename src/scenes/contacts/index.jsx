@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from '@aws-amplify/auth';
 import Header from "../../components/Header";
-import { Box,Typography, useTheme , Button} from "@mui/material";
+import { Box,Typography, useTheme , Button,Dialog,DialogTitle,DialogContent
+, DialogContentText, DialogActions} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -13,6 +14,7 @@ function Contacts() {
   const theme = useTheme();
   const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
   const colors = tokens(theme.palette.mode);
+  const [open, setOpen] =useState(false);
   const [users,setUsers]=useState([]);
   const REGION = process.env.REACT_APP_AWS_REGION;
   const cognitoClient = new CognitoIdentityProviderClient({ region: REGION,
@@ -24,7 +26,7 @@ function Contacts() {
 });
   const listUsers = async () => {
     try {
-      const data = await cognitoClient.send(new ListUsersCommand({ UserPoolId: "" }));
+      const data = await cognitoClient.send(new ListUsersCommand({ UserPoolId: "us-east-1_yZDcfnqL2" }));
       const usersWithIds = data.Users.map((user, index) => ({
         id: index + 1,
         username: user.Username,
@@ -61,10 +63,6 @@ function Contacts() {
     listUsers();
     }, []);
 
-  // function handleClick(e,cell) {
-  //   e.preventDefault();
-  //   console.log(cell.row.username,cell.row.email);
-  // }
 
 
 
@@ -75,7 +73,7 @@ function Contacts() {
     
     try {
       const params = {
-        UserPoolId: '', // Replace with your user pool ID
+        UserPoolId: process.env.REACT_APP_USER_POOL_ID, // Replace with your user pool ID
         Username: cellproperties.row.username,
         
       };
@@ -84,13 +82,14 @@ function Contacts() {
       const response = await cognitoClient.send(command);
       console.log(response);
       alert("user deleted successfully");
+      window.location.reload(false);
     } catch (err) {
       console.log('Error deleting user:', err);
     }
 
 
   } else {
-    console.log('You are logged in as', isCurrentUserAdmin)
+    console.log('You are logged in as', isCurrentUserAdmin) //can del
     console.log('Only Admininstrators can delete users');
     alert('Only Admininstrators can delete users');
     }
@@ -152,15 +151,31 @@ function Contacts() {
       field: "Delete",
       renderCell: (cellValues) =>{
         return (
+          <>
           <Button
           variant="contained"
             color='error'
-            onClick= {(event)=> {
-              handleClick(event,cellValues);
-            }}
+            onClick= {()=> setOpen(true)}
             >
             Delete
           </Button>
+          <Dialog open={open}
+          onClose={()=>setOpen(false)}>
+            <DialogContent>
+              <DialogContentText> Are you sure you want to delete 
+                this user ?</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={()=> setOpen(false)} color='warning'>Cancel</Button>
+              <Button onClick={(event)=> {
+              handleClick(event,cellValues);
+              setOpen(false);
+            }}
+            color='error'
+              >Delete</Button>
+            </DialogActions>
+            </Dialog>
+            </>
         );
       }
     }
