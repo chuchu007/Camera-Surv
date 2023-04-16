@@ -66,7 +66,7 @@ const Team = () => {
 
    
         const handleSubmit = async (event) => {
-        if (isCurrentUserAdmin) 
+        if (isCurrentUserAdmin==='true') 
         {
         event.preventDefault();
       
