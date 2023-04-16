@@ -42,6 +42,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
+
+
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -49,16 +51,24 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const [credentials, setCredentials] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [EmployeeClearnece,setEmployeeClearnece] =useState('');
   const [currentUsername, setCurrentUsername] = useState('Loading...');
 
 useEffect(() => {
     async function getCurrentCredentials() {
       try {
-        const credentials = await Auth.currentUserInfo();
-        setCredentials(credentials);
-        const adminStatus = credentials.attributes['custom:admin'];
+        const theseCredentials = await Auth.currentUserInfo();
+        setCredentials(theseCredentials);
+        const adminStatus = theseCredentials.attributes['custom:admin'];
         setIsAdmin(adminStatus);
-        setCurrentUsername(credentials.username)
+        console.log("The admin status is given as",adminStatus)
+        if(adminStatus==="false"){
+          setEmployeeClearnece('Staff');
+        }else{
+          setEmployeeClearnece('Admin');
+
+        }
+        setCurrentUsername(theseCredentials.username)
       } catch (error) {
         console.log('Error getting current credentials:', error);
       }
@@ -97,7 +107,6 @@ useEffect(() => {
 //     console.log(attributes['email']);
 //     setUserName=attributes['email'];
 //   })
-
 
 
 
@@ -165,7 +174,7 @@ useEffect(() => {
                     {currentUsername}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                {isAdmin ? "Admin" :"Staff"}
+                { EmployeeClearnece}
                 </Typography>
               </Box>
             </Box>
@@ -191,13 +200,6 @@ useEffect(() => {
               title="Add Users"
               to="/team"
               icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Manage Files"
-              to="/manageFiles"
-              // icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
