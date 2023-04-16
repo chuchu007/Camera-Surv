@@ -1,4 +1,7 @@
-import { Box, Typography, useTheme,TextField,Button , Switch,FormControlLabel} from "@mui/material";
+import { InputBase,Paper,IconButton,Box, Typography, useTheme,TextField,Button , Switch,FormControlLabel} from "@mui/material";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import InputAdornment from '@mui/material/InputAdornment';
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -18,7 +21,7 @@ const Team = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [credentials, setCredentials] = useState("");
     const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
-
+    const [visible,setVisible]=useState(false);
 
     
     const initialValues = {
@@ -138,7 +141,7 @@ const Team = () => {
                 <TextField
                   fullWidth
                   variant="filled"
-                  type="password"
+                  type={visible ? "text" : "password"}
                   label="Password"
                   
                   onChange={handlePasswordChange}
@@ -146,7 +149,18 @@ const Team = () => {
                   name="password"
                   
                   sx={{ gridColumn: "span 2" }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={() => setVisible(!visible)}>
+                          {visible ? <VisibilityIcon/>:<VisibilityOffIcon/>}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  
                 />
+                
                 {/* <TextField
                  
                   //variant="filled"
@@ -173,7 +187,7 @@ const Team = () => {
                     label="Admin"
                 />  
               </Box>
-              <Box display="flex" justifyContent="end" mt="20px">
+              <Box display="flex" justifyContent="center" mt="60px">
                 <Button type="submit" color="secondary" variant="contained">
                   Create New User
                 </Button>
