@@ -16,16 +16,14 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import VideocamIcon from "@mui/icons-material/Videocam";
 
-
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 import { ColorLensOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
-
 
   return (
     <MenuItem
@@ -42,8 +40,6 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-
-
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -51,66 +47,60 @@ const Sidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const [credentials, setCredentials] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-  const [EmployeeClearnece,setEmployeeClearnece] =useState('');
-  const [currentUsername, setCurrentUsername] = useState('Loading...');
+  const [EmployeeClearnece, setEmployeeClearnece] = useState("");
+  const [currentUsername, setCurrentUsername] = useState("Loading...");
 
-useEffect(() => {
+  useEffect(() => {
     async function getCurrentCredentials() {
       try {
         const theseCredentials = await Auth.currentUserInfo();
         setCredentials(theseCredentials);
-        const adminStatus = theseCredentials.attributes['custom:admin'];
+        const adminStatus = theseCredentials.attributes["custom:admin"];
         setIsAdmin(adminStatus);
-        console.log("The admin status is given as",adminStatus)
-        if(adminStatus==="false"){
-          setEmployeeClearnece('Staff');
-        }else{
-          setEmployeeClearnece('Admin');
-
+        console.log("The admin status is given as", adminStatus);
+        if (adminStatus === "false") {
+          setEmployeeClearnece("Staff");
+        } else {
+          setEmployeeClearnece("Admin");
         }
-        setCurrentUsername(theseCredentials.username)
+        setCurrentUsername(theseCredentials.username);
       } catch (error) {
-        console.log('Error getting current credentials:', error);
+        console.log("Error getting current credentials:", error);
       }
-    }  getCurrentCredentials();
+    }
+    getCurrentCredentials();
+  }, []);
 
-}, []);
+  //   var result;
+  //   Auth.currentAuthenticatedUser().then((user) => {
+  //     console.log('user email = ' + user.username);
+  //     result=9;
+  //     console.log('r' + result)
 
+  //   });
 
-//   var result;
-//   Auth.currentAuthenticatedUser().then((user) => {
-//     console.log('user email = ' + user.username);
-//     result=9;
-//     console.log('r' + result)
-     
-//   });
+  //   async function myFunction(){
+  //     const result= await Auth.currentAuthenticatedUser().then((user) =>
+  //      {return (user.username)});
 
- 
-//   async function myFunction(){
-//     const result= await Auth.currentAuthenticatedUser().then((user) =>
-//      {return (user.username)});
-    
-//      //console.log(result);
-//     let final_data = JSON.stringify(result);
+  //      //console.log(result);
+  //     let final_data = JSON.stringify(result);
 
-//     console.log(final_data);
-//     return {final_data};
-//   }
-//   const xyz=  myFunction();
-//   console.log(xyz);
+  //     console.log(final_data);
+  //     return {final_data};
+  //   }
+  //   const xyz=  myFunction();
+  //   console.log(xyz);
 
-// const x= Auth.currentUserInfo();
-// console.log(x)
-// let x;
-// Auth.currentUserInfo().then((userInfo) => {
-//     const { attributes = {} } = userInfo;
-//     console.log(attributes['email']);
-//     setUserName=attributes['email'];
-//   })
+  // const x= Auth.currentUserInfo();
+  // console.log(x)
+  // let x;
+  // Auth.currentUserInfo().then((userInfo) => {
+  //     const { attributes = {} } = userInfo;
+  //     console.log(attributes['email']);
+  //     setUserName=attributes['email'];
+  //   })
 
-
-
-  
   return (
     <Box
       sx={{
@@ -171,10 +161,10 @@ useEffect(() => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                    {currentUsername}
+                  {currentUsername}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                { EmployeeClearnece}
+                  {EmployeeClearnece}
                 </Typography>
               </Box>
             </Box>
@@ -203,14 +193,7 @@ useEffect(() => {
               selected={selected}
               setSelected={setSelected}
             />
-            
-            <Item
-              title="Manage Files"
-              to="/manageFiles"
-              // icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <Item
               title="Contacts Information"
               to="/contacts"
@@ -251,6 +234,13 @@ useEffect(() => {
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Manage Files"
+              to="/manageFiles"
+              icon={<VideocamIcon />}
               selected={selected}
               setSelected={setSelected}
             />
