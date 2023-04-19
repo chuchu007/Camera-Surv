@@ -146,7 +146,7 @@ app.post("/v1/api/billing", (req, res) => {
 				console.log(error);
 				res.send({ message: "Error in updating billing data" });
 			} else {
-				res.send({ message: "Billing data updated, Army rocks!" });
+				res.send({ message: "Billing data updated" });
 			}
 		}
 	);
