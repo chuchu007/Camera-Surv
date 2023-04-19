@@ -17,9 +17,10 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import FileIcon from '@mui/icons-material/InsertDriveFileOutlined'
+import FileIcon from "@mui/icons-material/InsertDriveFileOutlined";
 
 import { Auth } from "aws-amplify";
+import { ColorLensOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -184,7 +185,7 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+              User Data
             </Typography>
             <Item
               title="Add Users"
@@ -194,20 +195,41 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Camera Directory"
-              to="/buildingInfo"
-              icon={<FileIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
               title="Contacts Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Item
+              title="User Chart"
+              to="/pie"
+              icon={<PieChartOutlineOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Camera Management
+            </Typography>
+            <Item
+              title="Camera Directory"
+              to="/buildingInfo"
+              icon={<FileIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Manage Files"
+              to="/manageFiles"
+              icon={<VideocamIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
             <Item
               title="Invoices Balances"
               to="/invoices"
@@ -244,37 +266,24 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Manage Files"
-              to="/manageFiles"
-              icon={<VideocamIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Charts
+              Charts and metrics
             </Typography>
             <Item
-              title="Bar Chart"
+              title="Building Alerts"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+
             <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
+              title="Accumulated Alerts"
               to="/line"
               icon={<TimelineOutlinedIcon />}
               selected={selected}
