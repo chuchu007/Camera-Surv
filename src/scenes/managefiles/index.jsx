@@ -12,19 +12,26 @@ const ManageFiles = () => {
   const colors = tokens(theme.palette.mode);
   //const axios = require('axios');
 
+  
   const downloadfile = (filename) => {
     var thisurl = 'https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/file';
     thisurl = thisurl + '?filename='+ filename;
-    axios({url: thisurl, method: 'GET', responseType: 'blob'})
+    axios({url: thisurl, method: 'GET'})
       .then(response => {
-        console.log(response.data);
-        const downurl = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = downurl;
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        
+        console.log(response);
+        // fetch(response.data).then(response=>response.blob()).then(blob=>{
+        //   const blobURL = window.URL.createObjectURL(new Blob([blob]));
+        //   const aTag = document.createElement("a");
+        //   aTag.href = blobURL;
+        //   document.body.appendChild(aTag);
+        //   aTag.click();
+        //   aTag.remove();
+        // })
+        const aTag = document.createElement("a");
+        aTag.href = response.data;
+        document.body.appendChild(aTag);
+        aTag.click();
+        aTag.remove();
       });
     
   }
