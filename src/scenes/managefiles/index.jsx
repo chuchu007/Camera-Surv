@@ -64,6 +64,8 @@ const ManageFiles = () => {
       field: "action",
       headerName: "Action",
       flex: 1,
+      filterable:false,
+      sortable:false,
       renderCell: ({ row: { Key } }) => {
         return (
           <Button
@@ -84,6 +86,8 @@ const ManageFiles = () => {
       field: "delete",
       headerName: "Delete",
       flex: 1,
+      filterable:false,
+      sortable:false,
       renderCell: ({ row: { Key } }) => {
         return (
           <Button
@@ -156,7 +160,11 @@ const ManageFiles = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={data} columns={columns} />
+        <DataGrid
+        rows={data} 
+        columns={columns} 
+
+        />
       </Box>
     </Box>
   );
