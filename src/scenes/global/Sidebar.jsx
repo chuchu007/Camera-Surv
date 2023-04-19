@@ -17,9 +17,9 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import VideocamIcon from "@mui/icons-material/Videocam";
+import FileIcon from '@mui/icons-material/InsertDriveFileOutlined'
 
 import { Auth } from "aws-amplify";
-import { ColorLensOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -190,6 +190,13 @@ const Sidebar = () => {
               title="Add Users"
               to="/team"
               icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Camera Directory"
+              to="/buildingInfo"
+              icon={<FileIcon />}
               selected={selected}
               setSelected={setSelected}
             />

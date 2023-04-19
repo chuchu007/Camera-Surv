@@ -9,12 +9,20 @@ import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import { Route, Routes } from "react-router-dom";
+import BuildingDirectory from './scenes/buildingdirectory/buildingdirectory';
+import MapView from './scenes/buildingdirectory/mapView';
+import FloorDirectory from './scenes/floordirectory/floordirectory';
+import CameraDirectory from './scenes/cameradirectory/cameradirectory';
 import Team from "./scenes/team";
 import Calendar from "./scenes/calendar/calendar";
 import ManageFiles from "./scenes/managefiles";
 // import Invoices from "./scenes/invoices";
 import Contacts from "./scenes/contacts";
 import Bar from "./scenes/bar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Billing from './scenes/billing/billing';
+import PaymentSuccess from './scenes/billing/paymentSuccess';
+// import Bar from "./scenes/bar";
 // import Form from "./scenes/form";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
@@ -69,12 +77,18 @@ function App({ signOut, user }) {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/team" element={<Team />} />
+                <Route path="/buildingInfo" element={<BuildingDirectory />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/pie" element={<Pie />} />
                 <Route path="/line" element={<Line />} />
                 <Route path="/manageFiles" element={<ManageFiles />} />
                 <Route path="/bar" element={<Bar />} />
+	              <Route path="/floorInfo" element={<FloorDirectory/>} />
+	              <Route path="/cameraInfo" element={<CameraDirectory/>} />
+	              <Route path="/mapView" element={<MapView/>} />
+                <Route path="/billing" element={<Billing />} />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
               </Routes>
 
               {/* <div>
