@@ -20,6 +20,8 @@ import ManageFiles from "./scenes/managefiles";
 import Contacts from "./scenes/contacts";
 import Bar from "./scenes/bar";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Billing from './scenes/billing/billing';
+import PaymentSuccess from './scenes/billing/paymentSuccess';
 // import Bar from "./scenes/bar";
 // import Form from "./scenes/form";
 import Line from "./scenes/line";
@@ -85,6 +87,8 @@ function App({ signOut, user }) {
 	              <Route path="/floorInfo" element={<FloorDirectory/>} />
 	              <Route path="/cameraInfo" element={<CameraDirectory/>} />
 	              <Route path="/mapView" element={<MapView/>} />
+                <Route path="/billing" element={<Billing />} />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
               </Routes>
 
               {/* <div>

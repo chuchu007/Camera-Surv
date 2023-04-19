@@ -138,6 +138,20 @@ app.post("/v1/api/addFloor", (req, res) => {
 	);
 });
 
+app.post("/v1/api/billing", (req, res) => {
+	db.query(
+		'UPDATE transactions SET balance_rem = 0 WHERE user_id = 1',
+		(error, result) => {
+			if (error) {
+				console.log(error);
+				res.send({ message: "Error in updating billing data" });
+			} else {
+				res.send({ message: "Billing data updated, Army rocks!" });
+			}
+		}
+	);
+});
+
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)
 })
