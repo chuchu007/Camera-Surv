@@ -213,7 +213,7 @@ function Contacts() {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={users} columns={columns} />
+        <DataGrid  rows={users} columns={columns} />
       </Box>
     </Box>
   );
