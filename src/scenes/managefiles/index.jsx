@@ -1,10 +1,10 @@
-import { Box, Button, Typography} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
-import axios from 'axios';
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const ManageFiles = () => {
@@ -12,43 +12,39 @@ const ManageFiles = () => {
   const colors = tokens(theme.palette.mode);
   //const axios = require('axios');
 
-  
   const downloadfile = (filename) => {
-    var thisurl = 'https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/file';
-    thisurl = thisurl + '?filename='+ filename;
-    axios({url: thisurl, method: 'GET'})
-      .then(response => {
-        console.log(response);
-        // fetch(response.data).then(response=>response.blob()).then(blob=>{
-        //   const blobURL = window.URL.createObjectURL(new Blob([blob]));
-        //   const aTag = document.createElement("a");
-        //   aTag.href = blobURL;
-        //   document.body.appendChild(aTag);
-        //   aTag.click();
-        //   aTag.remove();
-        // })
-        const aTag = document.createElement("a");
-        aTag.href = response.data;
-        document.body.appendChild(aTag);
-        aTag.click();
-        aTag.remove();
-      });
-    
-  }
+    var thisurl =
+      "https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/file";
+    thisurl = thisurl + "?filename=" + filename;
+    axios({ url: thisurl, method: "GET" }).then((response) => {
+      console.log(response);
+      // fetch(response.data).then(response=>response.blob()).then(blob=>{
+      //   const blobURL = window.URL.createObjectURL(new Blob([blob]));
+      //   const aTag = document.createElement("a");
+      //   aTag.href = blobURL;
+      //   document.body.appendChild(aTag);
+      //   aTag.click();
+      //   aTag.remove();
+      // })
+      const aTag = document.createElement("a");
+      aTag.href = response.data;
+      document.body.appendChild(aTag);
+      aTag.click();
+      aTag.remove();
+    });
+  };
 
   const deletefile = (filename) => {
-    const choice = window.confirm("Are you sure to delete this file?")
-    if (choice){
-
-      var thisurl = 'https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/file';
-      thisurl = thisurl + '?filename='+ filename;
-      axios({url: thisurl, method: 'DELETE'})
-        .then(response => {
-          console.log(response.data);
-          
-        });
+    const choice = window.confirm("Are you sure to delete this file?");
+    if (choice) {
+      var thisurl =
+        "https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/file";
+      thisurl = thisurl + "?filename=" + filename;
+      axios({ url: thisurl, method: "DELETE" }).then((response) => {
+        console.log(response.data);
+      });
     }
-  }
+  };
 
   const columns = [
     {
@@ -71,21 +67,29 @@ const ManageFiles = () => {
       field: "action",
       headerName: "Action",
       flex: 1,
-      filterable:false,
-      sortable:false,
+      filterable: false,
+      sortable: false,
       renderCell: ({ row: { Key } }) => {
         return (
           <Button
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
+            variant="contained"
+            color="success"
             onClick={() => downloadfile(Key)}
           >
-            <Typography color={colors.greenAccent[100]} sx={{ ml: "5px" }}>
-              {'Download'}
-            </Typography>
+            Download
           </Button>
+
+          // <Button
+          //   width="60%"
+          //   m="0 auto"
+          //   p="5px"
+          //   display="flex"
+          //   onClick={() => downloadfile(Key)}
+          // >
+          //   <Typography color={colors.greenAccent[100]} sx={{ ml: "5px" }}>
+          //     {"Download"}
+          //   </Typography>
+          // </Button>
         );
       },
     },
@@ -93,27 +97,33 @@ const ManageFiles = () => {
       field: "delete",
       headerName: "Delete",
       flex: 1,
-      filterable:false,
-      sortable:false,
+      filterable: false,
+      sortable: false,
       renderCell: ({ row: { Key } }) => {
         return (
           <Button
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
+            variant="contained"
+            color="error"
             onClick={() => deletefile(Key)}
           >
-            <Typography color={colors.redAccent[300]} sx={{ ml: "5px" }}>
-              {'DELETE'}
-            </Typography>
+            Delete
           </Button>
-          
+
+          // <Button
+          //   width="60%"
+          //   m="0 auto"
+          //   p="5px"
+          //   display="flex"
+          //   onClick={() => deletefile(Key)}
+          // >
+          //   <Typography color={colors.redAccent[300]} sx={{ ml: "5px" }}>
+          //     {"DELETE"}
+          //   </Typography>
+          // </Button>
         );
       },
     },
   ];
-
 
   // axios.get('https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/files')
   //   .then(response => {
@@ -124,7 +134,8 @@ const ManageFiles = () => {
   //     console.log(error);
   //   });
 
-  const url = "https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/files";
+  const url =
+    "https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/files";
   const [data, setData] = useState([]);
 
   const fetchInfo = () => {
@@ -134,8 +145,8 @@ const ManageFiles = () => {
   useEffect(() => {
     fetchInfo();
   }, []);
-  
-    return (
+
+  return (
     <Box m="20px">
       <Header title="File System" subtitle="Managing the Files" />
       <Box
@@ -167,16 +178,10 @@ const ManageFiles = () => {
           },
         }}
       >
-        <DataGrid
-        rows={data} 
-        columns={columns} 
-
-        />
+        <DataGrid rows={data} columns={columns} />
       </Box>
     </Box>
   );
-    
-  
 };
 
 export default ManageFiles;
