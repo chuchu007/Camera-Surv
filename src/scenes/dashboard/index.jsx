@@ -9,6 +9,7 @@ import PieChart from "../../components/PieChart";
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import "./video.css";
+import "./Player.css";
 import { useEffect, useState, useRef } from "react";
 
 const format = (seconds) => {
@@ -30,6 +31,11 @@ const format = (seconds) => {
 
 const Dashboard = () => {
   const theme = useTheme();
+  const [showText, setShowText] = useState(false);
+  const [showTextDisplayOne, setShowTextDisplayOne] = useState(false);
+  const [showTextDisplayTwo, setShowTextDisplayTwo] = useState(false);
+  const [showTextDisplayThree, setShowTextDisplayThree] = useState(false);
+  const [showTextDisplayFour, setShowTextDisplayFour] = useState(false);
   const colors = tokens(theme.palette.mode);
   const mockTransactions = [
     {
@@ -139,6 +145,46 @@ const Dashboard = () => {
   const playedTime = format(currentPlayerTime);
   const fullMovieTime = format(movieDuration);
 
+  function handleMouseEnter() {
+    setShowText(true);
+  }
+
+  function handleMouseLeave() {
+    setShowText(false);
+  }
+
+  function handleMouseEnterDisplayOne() {
+    setShowTextDisplayOne(true);
+  }
+
+  function handleMouseLeaveDisplayOne() {
+    setShowTextDisplayOne(false);
+  }
+
+  function handleMouseEnterDisplayTwo() {
+    setShowTextDisplayTwo(true);
+  }
+
+  function handleMouseLeaveDisplayTwo() {
+    setShowTextDisplayTwo(false);
+  }
+
+  function handleMouseEnterDisplayThree() {
+    setShowTextDisplayThree(true);
+  }
+
+  function handleMouseLeaveDisplayThree() {
+    setShowTextDisplayThree(false);
+  }
+
+  function handleMouseEnterDisplayFour() {
+    setShowTextDisplayFour(true);
+  }
+
+  function handleMouseLeaveDisplayFour() {
+    setShowTextDisplayFour(false);
+  }
+
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -152,15 +198,18 @@ const Dashboard = () => {
         gap="10px"
       >
         <Box
+          className="player-container"
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onMouseEnter={handleMouseEnterDisplayOne}
+          onMouseLeave={handleMouseLeaveDisplayOne}
         >
           <ReactPlayer
-            width={"100%"}
-            height="100%"
+            width={"80%"}
+            height="80%"
             ref={playerRef}
             //url="https://static.videezy.com/system/resources/previews/000/004/298/original/22.mp4"
             url="https://static.videezy.com/system/resources/previews/000/004/360/original/84.mp4"
@@ -168,18 +217,33 @@ const Dashboard = () => {
             volume={volume}
             playbackRate={playerbackRate}
             onProgress={handlePlayerProgress}
+            pip={false}
             controls
             loop
             muted={muted}
             onError={() => console.log("onError callback")}
           />
+          {showTextDisplayOne && (
+            <div className="text-overlay">
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.greenAccent[100]}
+              >
+                Clark Building - Lobby
+              </Typography>
+            </div>
+          )}
         </Box>
         <Box
+          className="player-container"
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onMouseEnter={handleMouseEnterDisplayTwo}
+          onMouseLeave={handleMouseLeaveDisplayTwo}
         >
           <ReactPlayer
             width={"100%"}
@@ -195,13 +259,27 @@ const Dashboard = () => {
             muted={muted}
             onError={() => console.log("onError callback")}
           />
+          {showTextDisplayTwo && (
+            <div className="text-overlay">
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.greenAccent[100]}
+              >
+                Library - Main door
+              </Typography>
+            </div>
+          )}
         </Box>
         <Box
+          className="player-container"
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onMouseEnter={handleMouseEnterDisplayThree}
+          onMouseLeave={handleMouseLeaveDisplayThree}
         >
           <ReactPlayer
             width={"100%"}
@@ -217,13 +295,27 @@ const Dashboard = () => {
             muted={muted}
             onError={() => console.log("onError callback")}
           />
+          {showTextDisplayThree && (
+            <div className="text-overlay">
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.greenAccent[100]}
+              >
+                CV2 - Fl 1 Elevator
+              </Typography>
+            </div>
+          )}
         </Box>
         <Box
+          className="player-container"
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
+          onMouseEnter={handleMouseEnterDisplayFour}
+          onMouseLeave={handleMouseLeaveDisplayFour}
         >
           <ReactPlayer
             width={"100%"}
@@ -239,6 +331,17 @@ const Dashboard = () => {
             muted={muted}
             onError={() => console.log("onError callback")}
           />
+          {showTextDisplayFour && (
+            <div className="text-overlay">
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.greenAccent[100]}
+              >
+                Student Union - East Door
+              </Typography>
+            </div>
+          )}
         </Box>
         <Box
           gridColumn="span 8"
