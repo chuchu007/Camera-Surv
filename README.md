@@ -69,10 +69,10 @@ live video feeds coming from IP cameras that are meant to be monitored. The vide
 <p align="center">Fig 10. Alerts (count represented by buildings)</p>
 
 - Create User component: The create user component is used for creating users, it can be accessed through the side bar. The application is set as such that only “Admin” users can create new users. The user can only be created from inside the application, and anyone cannot signup to use the service. For signing up the following are required:
--- User name
--- User email
--- User password
--- Clearance level i.e. if the user is a admin or not.
+  - User name
+  - User email
+  - User password
+  - Clearance level i.e. if the user is a admin or not.
 If the user is not an admin it will automatically be assigned staff level clearance. Once the user has been created, the created user will receive a secret code that they can use to access the application. An image of the component is shown below.
 
 ![image](https://user-images.githubusercontent.com/101527504/235323225-a0d8c745-1bc6-4655-8212-49ab84e9c3d8.png)
