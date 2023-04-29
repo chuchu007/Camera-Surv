@@ -1,6 +1,10 @@
 # Camera-Surveillance-Dashboard--Cloud-Tehnologies
 React Surveillance Dashboard
 
+Full cloud architecture diagram of the implemented application is shown below.
+
+![image](https://user-images.githubusercontent.com/101527504/235326121-2ecb881d-b7ed-47cf-8ff6-207491763efb.png)
+
 
 This repository is for a React Dashboard application. The application is a Camera surveillance dashboard that allows its users to hook live streams from their IP Cameras to the dashboard. The application is a fully managed software powered by AI that supports multiple anomaly detection including but not limited to arson, robbery, theft and illegal dumping.
 
