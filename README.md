@@ -1,4 +1,4 @@
-# Camera-Surveillance-Dashboard--Cloud-Tehnologies
+# Camera-Surveillance-Dashboard--Cloud-Technologies
 React Surveillance Dashboard
 
 Full cloud architecture diagram of the implemented application is shown below.
