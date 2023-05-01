@@ -19,6 +19,7 @@ export class AddBuildingModal extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     fetch("http://localhost:3002/v1/api/building", {
       method: "POST",
       headers: {
@@ -27,6 +28,8 @@ export class AddBuildingModal extends Component {
       },
       body: JSON.stringify({
         building_name: event.target.BuildingName.value,
+        lat: this.props.lat,
+        lng: this.props.lng,
       }),
     })
       .then((res) => res.json())
@@ -40,7 +43,7 @@ export class AddBuildingModal extends Component {
         }
       );
   }
-
+  latitude = this.props.info;
   render() {
     return (
       <div className="container">
@@ -73,7 +76,10 @@ export class AddBuildingModal extends Component {
               id="contained-modal-title-vcenter"
               style={{ color: "#6870fa" }}
             >
-              Add Building
+              {"Latidue: " +
+                this.props.lat +
+                " --- Longitude: " +
+                this.props.lng}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
