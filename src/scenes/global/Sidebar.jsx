@@ -107,6 +107,7 @@ const Sidebar = () => {
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
+          height: "1350px",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
