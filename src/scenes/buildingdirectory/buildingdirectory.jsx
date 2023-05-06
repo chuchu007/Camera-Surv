@@ -19,12 +19,6 @@ import axios from "axios";
 import "./style.css";
 import "./App.css";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import {
-  GoogleMap,
-  InfoWindow,
-  MarkerF,
-  useLoadScript,
-} from "@react-google-maps/api";
 
 import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
