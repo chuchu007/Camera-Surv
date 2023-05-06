@@ -6,6 +6,10 @@ import screenfull from "screenfull";
 import ControlIcons from "../../components/ControlIcons";
 import Container from "@mui/material/Container";
 import PieChart from "../../components/PieChart";
+import CameraChart from "../../components/CameraChart";
+import CameraCount from "../cameradirectory/cameracount";
+import Totalbuildings from "../buildingdirectory/buildingcount";
+
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import "./video.css";
@@ -31,7 +35,7 @@ const format = (seconds) => {
 
 const Dashboard = () => {
   const theme = useTheme();
-  const [showText, setShowText] = useState(false);
+
   const [showTextDisplayOne, setShowTextDisplayOne] = useState(false);
   const [showTextDisplayTwo, setShowTextDisplayTwo] = useState(false);
   const [showTextDisplayThree, setShowTextDisplayThree] = useState(false);
@@ -55,6 +59,12 @@ const Dashboard = () => {
       camera: "First floor south wing",
       date: "2023-02-22",
       alert_type: "Dumping",
+    },
+    {
+      building: "Student Union",
+      camera: "Second floor",
+      date: "2023-01-16",
+      alert_type: "Arson",
     },
   ];
   const [playerstate, setPlayerState] = useState({
@@ -145,14 +155,6 @@ const Dashboard = () => {
   const playedTime = format(currentPlayerTime);
   const fullMovieTime = format(movieDuration);
 
-  function handleMouseEnter() {
-    setShowText(true);
-  }
-
-  function handleMouseLeave() {
-    setShowText(false);
-  }
-
   function handleMouseEnterDisplayOne() {
     setShowTextDisplayOne(true);
   }
@@ -208,8 +210,8 @@ const Dashboard = () => {
           onMouseLeave={handleMouseLeaveDisplayOne}
         >
           <ReactPlayer
-            width={"80%"}
-            height="80%"
+            width={"100%"}
+            height="100%"
             ref={playerRef}
             //url="https://static.videezy.com/system/resources/previews/000/004/298/original/22.mp4"
             url="https://static.videezy.com/system/resources/previews/000/004/360/original/84.mp4"
@@ -470,6 +472,75 @@ const Dashboard = () => {
               </Box>
             </Box>
           ))}
+        </Box>
+        <Box
+          display="inherit"
+          gridColumn="span 2"
+          //justifyContent="space-between"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor={colors.primary[400]}
+          colors={colors.grey[100]}
+          p="15px"
+        >
+          <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
+            Camera Count
+          </Typography>
+          <Box
+            pl="44px"
+            alignItems="center"
+            backgroundColor={colors.primary[400]}
+          >
+            <CameraCount />
+          </Box>
+        </Box>
+        <Box
+          display="inherit"
+          gridColumn="span 2"
+          //justifyContent="space-between"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor={colors.primary[400]}
+          colors={colors.grey[100]}
+          p="15px"
+        >
+          <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
+            Building Count
+          </Typography>
+          <Box
+            pl="44px"
+            alignItems="center"
+            backgroundColor={colors.primary[400]}
+          >
+            <Totalbuildings />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Box
+            mt="15px"
+            p="0 30px 0 30px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Camera Status
+              </Typography>
+            </Box>
+          </Box>
+          <Box height="255px" m="-20px 0 0 0">
+            <CameraChart isDashboard={true} />
+          </Box>
         </Box>
       </Box>
     </Box>
