@@ -32,4 +32,4 @@ const Totalbuildings = () => {
   );
 };
 
-export default Totalbuildings;
+export default Totalbuildings; 
