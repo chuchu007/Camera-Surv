@@ -1,4 +1,4 @@
-import { Box, Button, Typography} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import ReactPlayer from "react-player";
@@ -170,7 +170,7 @@ const ManageFiles = () => {
           window.location.reload(false);
         });
     }
-  }
+  };
 
   const columns = [
     {
@@ -194,8 +194,8 @@ const ManageFiles = () => {
       field: "action",
       headerName: "Play",
       flex: 1,
-      filterable:false,
-      sortable:false,
+      filterable: false,
+      sortable: false,
       renderCell: ({ row: { Key } }) => {
         return (
           <Button
@@ -209,6 +209,18 @@ const ManageFiles = () => {
               {'Play'}
             </Typography>
           </Button>
+
+          // <Button
+          //   width="60%"
+          //   m="0 auto"
+          //   p="5px"
+          //   display="flex"
+          //   onClick={() => downloadfile(Key)}
+          // >
+          //   <Typography color={colors.greenAccent[100]} sx={{ ml: "5px" }}>
+          //     {"Download"}
+          //   </Typography>
+          // </Button>
         );
       },
     },
@@ -216,22 +228,29 @@ const ManageFiles = () => {
       field: "delete",
       headerName: "Delete",
       flex: 1,
-      filterable:false,
-      sortable:false,
+      filterable: false,
+      sortable: false,
       renderCell: ({ row: { Key } }) => {
         return (
           <Button
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
+            variant="contained"
+            color="error"
             onClick={() => deletefile(Key)}
           >
-            <Typography color={colors.redAccent[300]} sx={{ ml: "5px" }}>
-              {'DELETE'}
-            </Typography>
+            Delete
           </Button>
-          
+
+          // <Button
+          //   width="60%"
+          //   m="0 auto"
+          //   p="5px"
+          //   display="flex"
+          //   onClick={() => deletefile(Key)}
+          // >
+          //   <Typography color={colors.redAccent[300]} sx={{ ml: "5px" }}>
+          //     {"DELETE"}
+          //   </Typography>
+          // </Button>
         );
       },
     },
@@ -246,7 +265,8 @@ const ManageFiles = () => {
   //     console.log(error);
   //   });
 
-  const url = "https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/files";
+  const url =
+    "https://booeg3cke4.execute-api.us-east-1.amazonaws.com/test/files";
   const [data, setData] = useState([]);
 
   const fetchInfo = () => {
@@ -318,8 +338,6 @@ const ManageFiles = () => {
     </Box>
     
   );
-    
-  
 };
 
 export default ManageFiles;

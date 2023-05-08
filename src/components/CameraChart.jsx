@@ -2,58 +2,56 @@ import React, { useEffect, useState } from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
-import {
-  CognitoIdentityProviderClient,
-  ListUsersCommand,
-} from "@aws-sdk/client-cognito-identity-provider";
+import axios from "axios";
 
-const PieChart = ({ isDashboard = false }) => {
+const CameraChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [users, setUsers] = useState([]);
-  const REGION = process.env.REACT_APP_AWS_REGION;
-  const cognitoClient = new CognitoIdentityProviderClient({
-    region: REGION,
-    credentials: {
-      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
-    },
-  });
+  const [inactive, setInActive] = useState(null);
+  const [active, setActive] = useState(null);
+  const [cameraData, setCameraData] = useState([]);
 
-  const listUsers = async () => {
-    try {
-      const data = await cognitoClient.send(
-        new ListUsersCommand({ UserPoolId: "us-east-1_yZDcfnqL2" })
-      );
-      let adminCount = 0;
-      let nonAdminCount = 0;
-      data.Users.forEach((user) => {
-        const isAdmin = user.Attributes.find(
-          (attr) => attr.Name === "custom:admin" && attr.Value === "true"
-        );
-
-        if (isAdmin) {
-          adminCount++;
-        } else {
-          nonAdminCount++;
-        }
-      });
-      setUsers([
-        { id: "Admin", label: "Adminsitrators", value: adminCount },
-        { id: "Staff", label: "Staff", value: nonAdminCount },
-      ]);
-    } catch (error) {
-      console.error(error);
-    }
+  const getActiveInactiveCameraData = async () => {
+    const response = await axios.get(
+      "http://localhost:3002/v1/api/inactive-active-cameras"
+    );
+    //let responsesx = response.data[0]["COUNT(*)"];
+    console.log(response.data[0]["count_of_zeros"]);
+    // setInActive(response.data[0]["count_of_zeros"]);
+    //setActive(responsesx);
+    setCameraData([
+      {
+        id: "Inactive",
+        label: "Inactive",
+        value: response.data[0]["count_of_zeros"],
+      },
+      {
+        id: "Active",
+        label: "Active",
+        value: response.data[0]["count_of_ones"],
+      },
+    ]);
   };
 
   useEffect(() => {
-    listUsers();
+    getActiveInactiveCameraData();
   }, []);
+
+  //   useEffect(() => {
+  //     getInactiveCameraData();
+  //     getActiveCameraData();
+  //     setData([
+  //         { id: "Admin", label: "Adminsitrators", value: adminCount },
+  //         { id: "Staff", label: "Staff", value: nonAdminCount },
+  //       ]);
+  //   }, []);
+
+  //   console.log("number of active cameras", active);
+  //   console.log("number of inactive cameras", inactive);
 
   return (
     <ResponsivePie
-      data={users}
+      data={cameraData}
       theme={{
         axis: {
           domain: {
@@ -92,7 +90,7 @@ const PieChart = ({ isDashboard = false }) => {
       padAngle={0.7}
       cornerRadius={3}
       activeOuterRadiusOffset={8}
-      colors={{ scheme: "nivo" }}
+      colors={{ scheme: "paired" }}
       borderColor={{
         from: "color",
         modifiers: [["darker", 0.2]],
@@ -161,4 +159,4 @@ const PieChart = ({ isDashboard = false }) => {
   );
 };
 
-export default PieChart;
+export default CameraChart;
