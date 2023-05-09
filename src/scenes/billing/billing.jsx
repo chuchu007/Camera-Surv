@@ -66,7 +66,7 @@ const Billing = () => {
           maxWidth="50%"
           justifyContent="center"
         >
-          <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Name on Card" />
+          <InputBase sx={{ ml: 2, flex: 1, color: "#000000", }} placeholder="Name on Card" required/>
         </Box>
         <br />
         <Box
@@ -75,7 +75,7 @@ const Billing = () => {
           borderRadius="3px"
           maxWidth="50%"
         >
-          <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Card Number" />
+          <InputBase sx={{ ml: 2, flex: 1, color: "#000000",}} placeholder="Card Number" required/>
         </Box>
         <br />
         <Box
@@ -85,7 +85,7 @@ const Billing = () => {
           maxWidth="50%"
           align="center"
         >
-          <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Expiration Date" />
+          <InputBase sx={{ ml: 2, flex: 1, color: "#000000", }} placeholder="Expiration Date" required/>
         </Box>
         <br />
         <Box
@@ -94,7 +94,7 @@ const Billing = () => {
           borderRadius="3px"
           maxWidth="50%"
         >
-          <InputBase sx={{ ml: 2, flex: 1 }} placeholder="CVV" />
+          <InputBase sx={{ ml: 2, flex: 1, color: "#000000", }} placeholder="CVV" required/>
         </Box>
         <br />
         <Button
