@@ -1,11 +1,9 @@
-
-import { useAuthenticator} from '@aws-amplify/ui-react';
-
-
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext, tokens } from "../../theme";
+import { Link } from "react-router-dom";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -13,13 +11,13 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 //import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const { signOut } = useAuthenticator()
+  const { signOut } = useAuthenticator();
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
@@ -48,7 +46,9 @@ const Topbar = () => {
           <NotificationsOutlinedIcon />
         </IconButton>
         <IconButton>
-          <SettingsOutlinedIcon />
+          <Link to="/settings">
+            <SettingsOutlinedIcon />
+          </Link>
         </IconButton>
         <IconButton onClick={() => signOut()}>
           <LogoutIcon />
