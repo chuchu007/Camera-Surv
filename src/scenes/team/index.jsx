@@ -11,10 +11,11 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { tokens } from "../../theme";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import InputAdornment from "@mui/material/InputAdornment";
 import { DataGrid } from "@mui/x-data-grid";
-import { tokens } from "../../theme";
+
 import Header from "../../components/Header";
 import { Auth } from "aws-amplify";
 import { useState, useEffect } from "react";
@@ -23,6 +24,8 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Team = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -86,6 +89,7 @@ const Team = () => {
         });
         console.log("Sign up result:", result);
         alert("User added successfully!");
+        window.location.reload(false);
       } catch (error) {
         console.error("Error signing up:", error);
         alert("Error adding user. Please try again.");
@@ -98,8 +102,23 @@ const Team = () => {
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Add a New User " />
-
+      {/* <Header title="CREATE USER" subtitle="Add a New User " /> */}
+      <Box
+        display="flex"
+        gridColumn="span 12"
+        //justifyContent="space-between"
+        justifyContent="center"
+        backgroundColor={colors.blueAccent[700]}
+        alignItems="center"
+        borderBottom={`2px solid ${colors.primary[500]}`}
+        colors={colors.grey[100]}
+        p="15px"
+      >
+        <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
+          Add Users
+        </Typography>
+      </Box>
+      <br></br>
       <form onSubmit={handleSubmit}>
         <Box
           display="-webkit-flex"
