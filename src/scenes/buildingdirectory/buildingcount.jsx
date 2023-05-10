@@ -21,7 +21,7 @@ const Totalbuildings = () => {
   useEffect(() => {
     getBuildingData();
   }, []);
-  console.log("number of buildings", numberOfBuildings);
+  //console.log("number of buildings", numberOfBuildings);
 
   return (
     // <Box
@@ -32,4 +32,4 @@ const Totalbuildings = () => {
   );
 };
 
-export default Totalbuildings; 
+export default Totalbuildings;
