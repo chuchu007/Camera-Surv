@@ -16,6 +16,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
+import Team from "../team";
 import {
   CognitoIdentityProviderClient,
   ListUsersCommand,
@@ -193,6 +194,7 @@ function Contacts() {
   return (
     <Box m="20px">
       <Header title="Users" subtitle="Managing the Team Members" />
+      <Team />
       <Box
         m="40px 0 0 0"
         height="75vh"
