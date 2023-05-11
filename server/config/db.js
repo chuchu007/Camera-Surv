@@ -1,7 +1,7 @@
  const mysql=require('mysql');
 
  const db = mysql.createConnection({
-   host:"camsurveillance.cew21pzbju15.us-west-2.rds.amazonaws.com",
+   host:"camsurveillance.czyvcdd36lpu.us-west-2.rds.amazonaws.com",
    user:"admin",
    password:"cmpe281*",
    port:"3306",
