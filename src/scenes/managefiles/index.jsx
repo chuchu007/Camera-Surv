@@ -189,11 +189,34 @@ const ManageFiles = () => {
       headerName: "Date",
       flex: 1,
     },
+    {
+      field: "alert",
+      headerName: "Alert",
+      flex: 1,
+    },
+    {
+      field: "camera_id",
+      headerName: "Camera ID",
+      flex: 1,
+    },
+    {
+      field: "building_id",
+      headerName: "Building",
+      flex: 1,
+    },
+    {
+      field: "floor",
+      headerName: "Floor",
+      flex: 1,
+    },
+    
+    
+    
     
     {
       field: "action",
       headerName: "Play",
-      flex: 1,
+      flex: 0,
       filterable: false,
       sortable: false,
       renderCell: ({ row: { Key } }) => {
@@ -227,7 +250,7 @@ const ManageFiles = () => {
     {
       field: "delete",
       headerName: "Delete",
-      flex: 1,
+      flex: 0,
       filterable: false,
       sortable: false,
       renderCell: ({ row: { Key } }) => {
@@ -278,13 +301,12 @@ const ManageFiles = () => {
   }, []);
   const [value, onChange] = useState(new Date());
   
+  
     return (
     
-    <Box m="40px">
+    <Box m="60px">
       
-        
-      
-      <Header title="File System" subtitle="Managing the Files" />
+      <Header title="Data Repository" subtitle="Managing the Files" />
       <Box
         m="20px 0 0 0"
         height="75vh"
@@ -312,13 +334,18 @@ const ManageFiles = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer": {
+            backgroundColor: `${colors.primary[400]}`,
+          },
         }}
       >
         <DataGrid
         rows={data} 
-        columns={columns} 
+        columns={columns}
+        slots={{ toolbar: GridToolbar }} 
 
         />
+        <Header title="File Streaming" subtitle="Click on Play Button to Stream!" />
         <ReactPlayer
             width={"50%"}
             height="50%"
