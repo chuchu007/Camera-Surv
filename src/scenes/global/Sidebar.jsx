@@ -13,11 +13,13 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import FileIcon from "@mui/icons-material/InsertDriveFileOutlined";
+import Billing from "../billing/billing";
 
 import { Auth } from "aws-amplify";
 import { ColorLensOutlined } from "@mui/icons-material";
@@ -230,11 +232,10 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
             <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+              title="Camera Chart"
+              to="/cameracounts"
+              icon={<CameraAltIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -247,9 +248,9 @@ const Sidebar = () => {
               Pages
             </Typography>
             <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
+              title="Billing"
+              to="/billing"
+              icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

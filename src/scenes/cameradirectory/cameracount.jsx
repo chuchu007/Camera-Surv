@@ -21,7 +21,7 @@ const CameraCount = () => {
   useEffect(() => {
     getCameradata();
   }, []);
-  console.log("lulu", numberOfCameras);
+  // console.log("CAMERA COUNT", numberOfCameras);
 
   return (
     // <Box

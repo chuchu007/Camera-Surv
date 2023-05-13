@@ -4,14 +4,16 @@ import Header from "../../components/Header";
 import ReactPlayer from "react-player";
 import screenfull from "screenfull";
 import ControlIcons from "../../components/ControlIcons";
+import axios from "axios";
 import Container from "@mui/material/Container";
 import PieChart from "../../components/PieChart";
 import CameraChart from "../../components/CameraChart";
 import CameraCount from "../cameradirectory/cameracount";
 import Totalbuildings from "../buildingdirectory/buildingcount";
-
+import Settings from "./settings";
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
+import RecentAlerts from "../../components/RecentAlerts";
 import "./video.css";
 import "./Player.css";
 import { useEffect, useState, useRef } from "react";
@@ -40,6 +42,7 @@ const Dashboard = () => {
   const [showTextDisplayTwo, setShowTextDisplayTwo] = useState(false);
   const [showTextDisplayThree, setShowTextDisplayThree] = useState(false);
   const [showTextDisplayFour, setShowTextDisplayFour] = useState(false);
+  const [dashboardFeed, setDashboardFeed] = useState([]);
   const colors = tokens(theme.palette.mode);
   const mockTransactions = [
     {
@@ -124,11 +127,11 @@ const Dashboard = () => {
   };
 
   const handlePlayerProgress = (state) => {
-    console.log("onProgress", state);
+    //console.log("onProgress", state);
     if (!playerstate.seeking) {
       setPlayerState({ ...playerstate, ...state });
     }
-    console.log("afterProgress", state);
+    //console.log("afterProgress", state);
   };
 
   const handlePlayerSeek = (e, newValue) => {
@@ -187,12 +190,27 @@ const Dashboard = () => {
     setShowTextDisplayFour(false);
   }
 
+  useEffect(() => {
+    getDashboardFeedData();
+  }, []);
+
+  const getDashboardFeedData = async () => {
+    const response = await axios.get(
+      "http://localhost:3002/v1/api/dashboard-feed"
+    );
+    setDashboardFeed(response.data);
+
+    //console.log("DATA: ", response.data);
+  };
+
+  //console.log("CHECK CAMERA ID", dashboardFeed[0]);
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
       </Box>
+
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
@@ -214,7 +232,11 @@ const Dashboard = () => {
             height="100%"
             ref={playerRef}
             //url="https://static.videezy.com/system/resources/previews/000/004/298/original/22.mp4"
-            url="https://static.videezy.com/system/resources/previews/000/004/360/original/84.mp4"
+            url={
+              dashboardFeed[0] !== undefined
+                ? dashboardFeed[0]["feed_url"]
+                : "https://static.videezy.com/system/resources/previews/000/041/016/original/alb_tvn0411_1080p.mp4"
+            }
             playing={playing}
             volume={volume}
             playbackRate={playerbackRate}
@@ -230,9 +252,11 @@ const Dashboard = () => {
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.greenAccent[100]}
+                color={colors.grey[100]}
               >
-                Clark Building - Lobby
+                {dashboardFeed[0]["building_name"] +
+                  " - " +
+                  dashboardFeed[0]["camera_loc"]}
               </Typography>
             </div>
           )}
@@ -251,7 +275,12 @@ const Dashboard = () => {
             width={"100%"}
             height="100%"
             ref={playerRef}
-            url="https://static.videezy.com/system/resources/previews/000/004/298/original/22.mp4"
+            //url="https://static.videezy.com/system/resources/previews/000/004/298/original/22.mp4"
+            url={
+              dashboardFeed[1] !== undefined
+                ? dashboardFeed[1]["feed_url"]
+                : "https://static.videezy.com/system/resources/previews/000/041/016/original/alb_tvn0411_1080p.mp4"
+            }
             playing={playing}
             volume={volume}
             playbackRate={playerbackRate}
@@ -268,7 +297,9 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.greenAccent[100]}
               >
-                Library - Main door
+                {dashboardFeed[1]["building_name"] +
+                  " - " +
+                  dashboardFeed[1]["camera_loc"]}
               </Typography>
             </div>
           )}
@@ -287,7 +318,15 @@ const Dashboard = () => {
             width={"100%"}
             height="100%"
             ref={playerRef}
-            url="https://static.videezy.com/system/resources/previews/000/020/764/original/P1033645.mp4"
+            //url="https://static.videezy.com/system/resources/previews/000/020/764/original/P1033645.mp4"
+            //url="https://static.videezy.com/system/resources/previews/000/000/402/original/chinatown.mp4"
+            //url="https://media.istockphoto.com/id/1289002194/video/cctv-camera-view-corporate-business-office.mp4?s=mp4-640x640-is&k=20&c=0vq9QxaruoGV-Xmmmua0XhMYPqTyYf1WtPL7t3gqE6U="
+            //url="https://media.istockphoto.com/id/984638344/video/hilo-island-of-hawaii.mp4?s=mp4-640x640-is&k=20&c=D6oQsvsiEKc12ELGVaUVe8aRaj-wXxYAYL03Kqo2KeM="
+            url={
+              dashboardFeed[2] !== undefined
+                ? dashboardFeed[2]["feed_url"]
+                : "https://static.videezy.com/system/resources/previews/000/041/016/original/alb_tvn0411_1080p.mp4"
+            }
             playing={playing}
             volume={volume}
             playbackRate={playerbackRate}
@@ -304,7 +343,9 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.greenAccent[100]}
               >
-                CV2 - Fl 1 Elevator
+                {dashboardFeed[2]["building_name"] +
+                  " - " +
+                  dashboardFeed[2]["camera_loc"]}
               </Typography>
             </div>
           )}
@@ -323,7 +364,12 @@ const Dashboard = () => {
             width={"100%"}
             height="100%"
             ref={playerRef}
-            url="https://static.videezy.com/system/resources/previews/000/005/555/original/Times_Square_Wide.mp4"
+            //url="https://static.videezy.com/system/resources/previews/000/005/555/original/Times_Square_Wide.mp4"
+            url={
+              dashboardFeed[3] !== undefined
+                ? dashboardFeed[3]["feed_url"]
+                : "https://static.videezy.com/system/resources/previews/000/041/016/original/alb_tvn0411_1080p.mp4"
+            }
             playing={playing}
             volume={volume}
             playbackRate={playerbackRate}
@@ -340,10 +386,85 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.greenAccent[100]}
               >
-                Student Union - East Door
+                {dashboardFeed[3]["building_name"] +
+                  " - " +
+                  dashboardFeed[3]["camera_loc"]}
               </Typography>
             </div>
           )}
+        </Box>
+        <Box
+          display="inherit"
+          //gridColumn="span 2"
+          gridColumn="span 4"
+          gridRow="span 2"
+          //justifyContent="space-between"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor={colors.primary[400]}
+          colors={colors.grey[100]}
+          p="15px"
+        >
+          <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
+            Camera Count
+          </Typography>
+          <Box
+            pl="44px"
+            alignItems="center"
+            backgroundColor={colors.primary[400]}
+          >
+            <CameraCount />
+          </Box>
+        </Box>
+        <Box
+          display="inherit"
+          //gridColumn="span 2"
+          gridColumn="span 4"
+          gridRow="span 2"
+          //justifyContent="space-between"
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor={colors.primary[400]}
+          colors={colors.grey[100]}
+          p="15px"
+        >
+          <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
+            Building Count
+          </Typography>
+          <Box
+            pl="44px"
+            alignItems="center"
+            backgroundColor={colors.primary[400]}
+          >
+            <Totalbuildings />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Box
+            mt="15px"
+            p="0 30px 0 30px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Camera Status
+              </Typography>
+            </Box>
+          </Box>
+          <Box height="255px" m="-20px 0 0 0">
+            <CameraChart isDashboard={true} />
+          </Box>
         </Box>
         <Box
           gridColumn="span 8"
@@ -423,7 +544,8 @@ const Dashboard = () => {
             <BarChart isDashboard={true} />
           </Box>
         </Box>
-        <Box
+        <RecentAlerts />
+        {/* <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -472,76 +594,7 @@ const Dashboard = () => {
               </Box>
             </Box>
           ))}
-        </Box>
-        <Box
-          display="inherit"
-          gridColumn="span 2"
-          //justifyContent="space-between"
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor={colors.primary[400]}
-          colors={colors.grey[100]}
-          p="15px"
-        >
-          <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
-            Camera Count
-          </Typography>
-          <Box
-            pl="44px"
-            alignItems="center"
-            backgroundColor={colors.primary[400]}
-          >
-            <CameraCount />
-          </Box>
-        </Box>
-        <Box
-          display="inherit"
-          gridColumn="span 2"
-          //justifyContent="space-between"
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor={colors.primary[400]}
-          colors={colors.grey[100]}
-          p="15px"
-        >
-          <Typography color={colors.grey[100]} variant="h3" fontWeight="600">
-            Building Count
-          </Typography>
-          <Box
-            pl="44px"
-            alignItems="center"
-            backgroundColor={colors.primary[400]}
-          >
-            <Totalbuildings />
-          </Box>
-        </Box>
-
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="15px"
-            p="0 30px 0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Camera Status
-              </Typography>
-            </Box>
-          </Box>
-          <Box height="255px" m="-20px 0 0 0">
-            <CameraChart isDashboard={true} />
-          </Box>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

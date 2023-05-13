@@ -105,7 +105,7 @@ const BuildingDirectory = (props) => {
         <Header title="Building Directory" subtitle="Building Management" />
 
         <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
-          <IconButton
+          {/* <IconButton
             onClick={handleClick}
             style={{
               backgroundColor: colors.greenAccent[500],
@@ -113,7 +113,7 @@ const BuildingDirectory = (props) => {
             }}
           >
             <Map />
-          </IconButton>
+          </IconButton> */}
           <IconButton
             onClick={() => setAddModalShow(true)}
             sx={{

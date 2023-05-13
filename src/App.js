@@ -1,5 +1,5 @@
 import BuildingDirectory from "./scenes/buildingdirectory/buildingdirectory";
-import MapView from "./scenes/buildingdirectory/mapView";
+
 import FloorDirectory from "./scenes/floordirectory/floordirectory";
 import CameraDirectory from "./scenes/cameradirectory/cameradirectory";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,12 +19,15 @@ import Dashboard from "./scenes/dashboard";
 import { Route, Routes } from "react-router-dom";
 import Team from "./scenes/team";
 import Calendar from "./scenes/calendar/calendar";
+import FAQ from "./scenes/faq";
+import Settings from "./scenes/dashboard/settings";
 import ManageFiles from "./scenes/managefiles";
 // import Invoices from "./scenes/invoices";
 import Contacts from "./scenes/contacts";
 import CameraCount from "./scenes/cameradirectory/cameracount";
 import Bar from "./scenes/bar";
 import CameraPie from "./scenes/cameradirectory/cameragraph";
+import RecentAlerts from "./components/RecentAlerts";
 // import Form from "./scenes/form";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
@@ -92,11 +95,13 @@ function App({ signOut, user }) {
                 <Route path="/bar" element={<Bar />} />
                 <Route path="/floorInfo" element={<FloorDirectory />} />
                 <Route path="/cameraInfo" element={<CameraDirectory />} />
-                <Route path="/mapView" element={<MapView />} />
+                <Route path="/faq" element={<FAQ />} />
                 <Route path="/billing" element={<Billing />} />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/cameracount" element={<CameraCount />} />
                 <Route path="/cameracounts" element={<CameraPie />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/recentalerts" element={<RecentAlerts />} />
               </Routes>
 
               {/* <div>
