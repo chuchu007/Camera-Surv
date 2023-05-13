@@ -254,9 +254,11 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                {dashboardFeed[0]["building_name"] +
-                  " - " +
-                  dashboardFeed[0]["camera_loc"]}
+                {dashboardFeed[0] !== undefined
+                  ? dashboardFeed[0]["building_name"] +
+                    " - " +
+                    dashboardFeed[0]["camera_loc"]
+                  : "No data to display"}
               </Typography>
             </div>
           )}
@@ -297,9 +299,11 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.greenAccent[100]}
               >
-                {dashboardFeed[1]["building_name"] +
-                  " - " +
-                  dashboardFeed[1]["camera_loc"]}
+                {dashboardFeed[1] !== undefined
+                  ? dashboardFeed[1]["building_name"] +
+                    " - " +
+                    dashboardFeed[1]["camera_loc"]
+                  : "No data to display"}
               </Typography>
             </div>
           )}
@@ -343,9 +347,11 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.greenAccent[100]}
               >
-                {dashboardFeed[2]["building_name"] +
-                  " - " +
-                  dashboardFeed[2]["camera_loc"]}
+                {dashboardFeed[2] !== undefined
+                  ? dashboardFeed[2]["building_name"] +
+                    " - " +
+                    dashboardFeed[2]["camera_loc"]
+                  : "No data to display"}
               </Typography>
             </div>
           )}
@@ -386,9 +392,11 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.greenAccent[100]}
               >
-                {dashboardFeed[3]["building_name"] +
-                  " - " +
-                  dashboardFeed[3]["camera_loc"]}
+                {dashboardFeed[3] !== undefined
+                  ? dashboardFeed[3]["building_name"] +
+                    " - " +
+                    dashboardFeed[3]["camera_loc"]
+                  : "No data to display"}
               </Typography>
             </div>
           )}
