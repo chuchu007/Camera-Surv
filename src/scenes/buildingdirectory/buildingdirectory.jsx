@@ -31,6 +31,7 @@ const BuildingDirectory = (props) => {
   const theme = useTheme();
 
   const [buildings, setBuildings] = useState([]);
+  const [cameraTable, setCameraTable] = useState([]);
   let navigate = useNavigate();
   const [addModalShow, setAddModalShow] = useState(false);
   const colors = tokens(theme.palette.mode);
@@ -75,6 +76,7 @@ const BuildingDirectory = (props) => {
 
   useEffect(() => {
     getBuildingData();
+    getCameraTable();
   }, []);
 
   const getBuildingData = async () => {
@@ -82,6 +84,14 @@ const BuildingDirectory = (props) => {
       "http://localhost:3002/v1/api/building-details"
     );
     setBuildings(response.data);
+  };
+
+  const getCameraTable = async () => {
+    const response = await axios.get(
+      "http://localhost:3002/v1/api/camera-table"
+    );
+    setCameraTable(response.data);
+    console.log("SYS:", response.data);
   };
 
   let addModalClose = () => setAddModalShow(false);
@@ -198,6 +208,41 @@ const BuildingDirectory = (props) => {
                         fontWeight="600"
                       >
                         {transaction.building_name}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography
+                        color={colors.primary[100]}
+                        variant="h6" // changed to h4
+                        fontWeight="600"
+                      >
+                        {"Cameras: " +
+                          (cameraTable.find(
+                            (item) =>
+                              item.building_name === transaction.building_name
+                          )?.num_cameras || 0)}
+                        <Typography
+                          color={colors.blueAccent[500]}
+                          variant="h6" // changed to h4
+                          fontWeight="600"
+                        >
+                          {"Active Cameras: " +
+                            (cameraTable.find(
+                              (item) =>
+                                item.building_name === transaction.building_name
+                            )?.active || 0)}
+                        </Typography>
+                        <Typography
+                          color={colors.redAccent[500]}
+                          variant="h6" // changed to h4
+                          fontWeight="600"
+                        >
+                          {"Inactive Cameras: " +
+                            (cameraTable.find(
+                              (item) =>
+                                item.building_name === transaction.building_name
+                            )?.inactive || 0)}
+                        </Typography>
                       </Typography>
                     }
                   />
