@@ -13,8 +13,15 @@ import {
   ListItemText,
   Typography,
   useTheme,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import Header from "../../components/Header";
+import ReactPlayer from "react-player";
 import { tokens } from "../../theme";
 
 const Calendar = () => {
@@ -23,6 +30,20 @@ const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [allAlerts, setAllAlerts] = useState([]);
   const [xyz, setXYZ] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [eventTitle, setEventTitle] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventURL, setEventURL] = useState("");
+  const [eventBuildingName, setEventBuildingName] = useState("");
+  const [eventCameraLocation, setEventCameraLocation] = useState("");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
@@ -64,6 +85,7 @@ const Calendar = () => {
         color: color,
         extendedProps: {
           description: event.building_name,
+          camera_loc: event.camera_loc,
         },
       };
     });
@@ -80,11 +102,25 @@ const Calendar = () => {
   }));
 
   const handleEventClick = (selected) => {
-    if (
-      window.confirm(` '${selected.event.title}' '${selected.event.start}'`)
-    ) {
-      selected.event.remove();
-    }
+    //window.confirm(` '${selected.event.title}' '${selected.event.start}'`);
+    setEventDate(`${selected.event.start}`);
+    setEventTitle(`${selected.event.title}`);
+    setEventBuildingName(`${selected.event.extendedProps.description}`);
+    setEventCameraLocation(`${selected.event.extendedProps.camera_loc}`);
+    console.log("BUILDING NAME:", selected.event.extendedProps.description);
+    if (`${selected.event.title}` === "Arson") {
+      setEventURL(
+        "https://www.shutterstock.com/shutterstock/videos/1065539326/preview/stock-footage-a-man-is-pouring-fuel-over-plastic-garbage-a-homeless-man-burns-trash-in-an-iron-barrel.webm"
+      );
+    } else if (`${selected.event.title}` === "Dumping") {
+      setEventURL(
+        "https://www.shutterstock.com/shutterstock/videos/1078038722/preview/stock-footage-garbage-people-throw-out-garbage-full-bins-garbage-lying-on-the-streets-of-the-city-people-walk.webm"
+      );
+    } else
+      setEventURL(
+        "https://media.istockphoto.com/id/514482433/video/parking-lot-car-accident.mp4?s=mp4-640x640-is&k=20&c=gQhuSP5sJ2n_0s-px-s7m-WGp4O2L335SNKINdHVS6M="
+      );
+    setOpen(true);
   };
 
   const handleEventRender = (info) => {
@@ -128,6 +164,69 @@ const Calendar = () => {
             events={xyz}
           />
         </Box>
+      </Box>
+      <Box>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle
+            sx={{
+              color: "success.dark",
+              display: "inline",
+              fontWeight: "bold",
+              mx: 0.5,
+              fontSize: 14,
+            }}
+          >
+            {eventDate}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText
+              sx={{
+                color: "error.dark",
+                display: "inline",
+                fontWeight: "bold",
+                mx: 0.1,
+                fontSize: 14,
+              }}
+            >
+              {eventTitle}
+            </DialogContentText>
+          </DialogContent>
+          <DialogContent>
+            <DialogContentText
+              sx={{
+                color: "text.primary",
+
+                display: "inline",
+                fontWeight: "bold",
+                mx: 0.1,
+                fontSize: 14,
+              }}
+            >
+              {eventBuildingName + " ( " + eventCameraLocation + " ) "}
+            </DialogContentText>
+          </DialogContent>
+          <ReactPlayer
+            width={"100%"}
+            height="100%"
+            //ref={playerRef}
+            //url="https://www.shutterstock.com/shutterstock/videos/1078038722/preview/stock-footage-garbage-people-throw-out-garbage-full-bins-garbage-lying-on-the-streets-of-the-city-people-walk.webm"
+            url={eventURL}
+            playing={true}
+            volume={true}
+            //playbackRate={playerbackRate}
+            //onProgress={handlePlayerProgress}
+            pip={false}
+            controls
+            loop
+            muted={true}
+            onError={() => console.log("onError callback")}
+          />
+          <DialogActions>
+            <Button onClick={handleClose} color="warning">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     </Box>
   );
