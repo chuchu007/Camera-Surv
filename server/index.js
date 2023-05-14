@@ -136,6 +136,19 @@ app.get("/v1/api/inactive-active-cameras", (req, res) => {
   );
 });
 
+app.get("/v1/api/camera-table", (req, res) => {
+  db.query(
+    "SELECT building_name,COUNT(*) AS num_cameras, SUM(CASE WHEN network_state = 1 THEN 1 ELSE 0 END) AS active, SUM(CASE WHEN network_state = 0 THEN 1 ELSE 0 END) AS inactive FROM cam_sur.camera GROUP BY building_name;",
+
+    (err, result) => {
+      if (err) {
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.get("/v1/api/recent-alerts", (req, res) => {
   db.query(
     "SELECT building_name,event_type,event_date,camera_loc FROM cam_sur.event JOIN cam_sur.camera ON cam_sur.event.camera_id = cam_sur.camera.camera_id ORDER BY event_id DESC LIMIT 10;",
