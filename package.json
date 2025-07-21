@@ -81,7 +81,11 @@
   }
 }
 "dependencies": {
+  "@aws-amplify/ui-react": "^4.5.1",
+  "@aws-sdk/client-cognito-identity-provider": "^3.315.0",
   ...
+  "yup": "^1.0.2",
   "serve": "^14.2.0"
 }
+
 
