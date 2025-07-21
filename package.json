@@ -50,10 +50,11 @@
     "recharts": "^2.5.0",
     "screenfull": "^6.0.2",
     "web-vitals": "^2.1.4",
-    "yup": "^1.0.2"
+    "yup": "^1.0.2",
+    "serve": "^14.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build -l $PORT",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -80,12 +81,3 @@
     "tailwindcss": "^3.3.1"
   }
 }
-"dependencies": {
-  "@aws-amplify/ui-react": "^4.5.1",
-  "@aws-sdk/client-cognito-identity-provider": "^3.315.0",
-  ...
-  "yup": "^1.0.2",
-  "serve": "^14.2.0"
-}
-
-
