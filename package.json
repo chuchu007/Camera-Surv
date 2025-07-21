@@ -80,3 +80,8 @@
     "tailwindcss": "^3.3.1"
   }
 }
+"dependencies": {
+  ...
+  "serve": "^14.2.0"
+}
+
