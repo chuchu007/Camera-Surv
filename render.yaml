@@ -1,3 +1,4 @@
+env: node
 buildCommand: npm install && npm run build
 startCommand: serve -s build -l $PORT
 envVars:
