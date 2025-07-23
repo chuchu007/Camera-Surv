@@ -4,6 +4,7 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "react-scripts": "^5.0.1",
     "@aws-amplify/ui-react": "^4.5.1",
     "@aws-sdk/client-cognito-identity-provider": "^3.315.0",
     "@chakra-ui/react": "^2.4.1",
