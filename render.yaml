@@ -1,0 +1,5 @@
+buildCommand: npm install && npm run build
+startCommand: serve -s build -l $PORT
+envVars:
+  - key: NODE_VERSION
+    value: 18.16.0
